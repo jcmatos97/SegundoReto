@@ -7,7 +7,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
-
+import { FormsModule } from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -20,7 +22,10 @@ import {MatTableModule} from '@angular/material/table';
     MatIconModule,
     MatDividerModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    MatSelectModule
   ]
 })
 export class AngularMaterialModule { }

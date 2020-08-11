@@ -1,53 +1,39 @@
-<h2>Marcas</h2>
-<!-- 
-    <mat-divider></mat-divider>
- -->
-<p>
-    <mat-form-field>
-        <input type="number" placeholder="Id" matInput>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field>
-        <input type="text" placeholder="Nombre" matInput>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field>
-        <input type="number" placeholder="Estado" matInput>
-    </mat-form-field>
-</p>
+<h2>{{this.title}}</h2>
 
-<table mat-table [dataSource]="" class="mat-elevation-z8">
+ <mat-form-field>
+     <input type="text" placeholder="Nombre" [(ngModel)]="model.nombre" matInput>
+ </mat-form-field>
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+<button mat-raised-button class="btn"color="primary" (click)="save()" *ngIf="model.id">Modificar</button>
+<button mat-raised-button class="btn"color="primary" (click)="save()" *ngIf="!model.id">Crear</button>
+<button mat-raised-button class="btn" (click)="clean()">Limpiar Campos</button>
+
+<!-- <pre>
+    {{this.marca | json}}
+</pre> -->
+
+<div *ngIf="this.processing" class="align-center">
+    <mat-spinner></mat-spinner>
+</div>
+
+<table mat-table [dataSource]="this.dataSource" class="mat-elevation-z8" *ngIf="!this.processing">
+    <!-- -->
+    <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
     </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <!-- -->
+    <ng-container matColumnDef="Accion">
+        <th mat-header-cell *matHeaderCellDef> Accion </th>
+        <td mat-cell *matCellDef="let element"> 
+            <button mat-mini-fab color="basic" class="btn" (click)="update(element)">
+                <mat-icon>build</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" class="btn" (click)="delete(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
     </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef> Weight </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-    </ng-container>
-  
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
+</table>
